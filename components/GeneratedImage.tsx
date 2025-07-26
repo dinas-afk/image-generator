@@ -52,8 +52,8 @@ export function GeneratedImage({ src, alt, prompt, aspectRatio, seed }: Generate
         <img
           src={src}
           alt={alt}
-          className="w-full h-auto transition-transform duration-500 group-hover:scale-[1.02]"
-          style={{ aspectRatio: aspectRatio.replace(':', '/') }}
+          className="w-full h-auto max-w-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+          // style={{ aspectRatio: aspectRatio.replace(':', '/') }}
         />
         
         {/* Gradient Overlay */}
@@ -85,18 +85,18 @@ export function GeneratedImage({ src, alt, prompt, aspectRatio, seed }: Generate
       </div>
       
       {/* Image Details */}
-      <div className="p-6 space-y-6">
-        <div className="space-y-3">
-          <div className="flex items-center gap-2 mb-3">
+      <div className="p-4 space-y-4">
+        <div className="space-y-2">
+          <div className="flex items-center gap-2 mb-2">
             <div className="w-1 h-6 bg-gradient-to-b from-cyan-400 to-purple-400 rounded-full"></div>
             <h3 className="font-semibold text-slate-200 uppercase tracking-wider text-sm">Neural Creation Details</h3>
           </div>
-          <div className="p-4 bg-slate-900/50 rounded-xl border border-slate-700/50">
+          <div className="p-3 bg-slate-900/50 rounded-xl border border-slate-700/50">
             <p className="text-slate-300 text-sm leading-relaxed font-mono">{prompt}</p>
           </div>
         </div>
         
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-3">
           <div className="p-3 bg-slate-900/30 rounded-lg border border-slate-700/30">
             <div className="flex items-center gap-2 mb-1">
               <Monitor className="w-3 h-3 text-slate-400" />
@@ -119,7 +119,7 @@ export function GeneratedImage({ src, alt, prompt, aspectRatio, seed }: Generate
         <div className="flex gap-3">
           <button
             onClick={copyPrompt}
-            className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-slate-700 to-slate-600 hover:from-slate-600 hover:to-slate-500 border border-slate-600/50 rounded-xl text-sm transition-all duration-300 text-slate-200 hover:text-white"
+            className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-gradient-to-r from-slate-700 to-slate-600 hover:from-slate-600 hover:to-slate-500 border border-slate-600/50 rounded-xl text-sm transition-all duration-300 text-slate-200 hover:text-white"
           >
             <Copy className="w-4 h-4" />
             {copied ? 'Prompt Copied!' : 'Copy Neural Prompt'}

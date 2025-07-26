@@ -5,11 +5,11 @@ interface AspectRatioSelectorProps {
   }
   
   const ASPECT_RATIOS = [
-    { value: '1:1', label: 'Square', description: '1024×1024', icon: '⬜' },
-    { value: '16:9', label: 'Landscape', description: '1365×768', icon: '🖼️' },
-    { value: '9:16', label: 'Portrait', description: '768×1365', icon: '📱' },
-    { value: '4:3', label: 'Standard', description: '1182×886', icon: '🖥️' },
-    { value: '3:4', label: 'Tall', description: '886×1182', icon: '📄' },
+    { value: '1:1', label: 'Square', description: '768×768', icon: '⬜' },
+    { value: '16:9', label: 'Landscape', description: '1024×576', icon: '🖼️' },
+    { value: '9:16', label: 'Portrait', description: '576×1024', icon: '📱' },
+    { value: '4:3', label: 'Standard', description: '896×672', icon: '🖥️' },
+    { value: '3:4', label: 'Tall', description: '672×896', icon: '📄' },
   ];
   
   export function AspectRatioSelector({ value, onChange, disabled }: AspectRatioSelectorProps) {

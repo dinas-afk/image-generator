@@ -7,6 +7,13 @@ interface GenerationOptions {
   outputFormat?: 'jpeg' | 'png';
 }
 
+interface EditOptions {
+  prompt: string;
+  inputImage: string; // Base64 encoded image
+  seed?: number;
+  outputFormat?: 'jpeg' | 'png';
+}
+
 interface GenerationState {
   isGenerating: boolean;
   progress: string;
@@ -61,7 +68,56 @@ export function useImageGeneration() {
         isGenerating: false,
         progress: '',
         result: null,
-        error: error.message,
+        error: error instanceof Error ? error.message : 'Operation failed',
+      });
+    }
+  }, []);
+
+  const editImage = useCallback(async (options: EditOptions) => {
+    setState({
+      isGenerating: true,
+      progress: 'Submitting edit request...',
+      result: null,
+      error: null,
+    });
+
+    try {
+      // Submit edit request
+      const response = await fetch('/api/edit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          prompt: options.prompt,
+          input_image: options.inputImage,
+          seed: options.seed,
+          output_format: options.outputFormat,
+        }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Edit failed');
+      }
+
+      const { id, polling_url } = await response.json();
+
+      // Poll for results
+      setState(prev => ({ ...prev, progress: 'Editing image...' }));
+      
+      const result = await pollForResult(id, polling_url);
+      
+      setState({
+        isGenerating: false,
+        progress: '',
+        result: result.result.sample,
+        error: null,
+      });
+    } catch (error) {
+      setState({
+        isGenerating: false,
+        progress: '',
+        result: null,
+        error: error instanceof Error ? error.message : 'Operation failed',
       });
     }
   }, []);
@@ -111,6 +167,7 @@ export function useImageGeneration() {
   return {
     ...state,
     generateImage,
+    editImage,
     reset,
   };
 }
