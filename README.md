@@ -10,13 +10,16 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 cp .env.example .env.local
 ```
 
-2. Edit `.env.local` and add your actual BFL AI API key:
+2. Edit `.env.local` and add your API keys:
 
 ```
-BFL_API_KEY=your_actual_api_key_here
+BFL_API_KEY=your_actual_bfl_api_key_here
+FAL_KEY=your_actual_fal_api_key_here
 ```
 
-You can get your BFL AI API key from [BFL AI](https://api.bfl.ai/).
+You can get your API keys from:
+- BFL AI API key: [BFL AI](https://api.bfl.ai/)
+- Fal AI API key: [fal.ai](https://www.fal.ai/)
 
 ### Running the Development Server
 
